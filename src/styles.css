@@ -1,0 +1,160 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Unbounded", "Manrope", sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-tile: var(--tile);
+  --color-tile-ink: var(--tile-ink);
+  --color-magenta: var(--brand-to);
+  --color-success: var(--success);
+  --color-overlay: var(--overlay);
+}
+
+:root {
+  --radius: 0.875rem;
+  --brand-from: oklch(0.56 0.25 292);
+  --brand-to: oklch(0.64 0.26 345);
+  --gradient-brand: linear-gradient(120deg, var(--brand-from), var(--brand-to));
+  --background: oklch(0.97 0.012 280);
+  --foreground: oklch(0.22 0.06 270);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: var(--brand-from);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.93 0.02 280);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.93 0.018 280);
+  --muted-foreground: oklch(0.5 0.04 275);
+  --accent: oklch(0.93 0.03 300);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.6 0.22 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.66 0.17 155);
+  --border: oklch(0.9 0.02 280);
+  --input: oklch(0.9 0.02 280);
+  --ring: var(--brand-from);
+  --surface: oklch(1 0 0);
+  --tile: oklch(0.95 0.014 275);
+  --tile-ink: oklch(0.26 0.08 268);
+  --overlay: oklch(0.15 0.04 270 / 70%);
+  --app-glow: radial-gradient(120% 60% at 50% -10%, oklch(0.88 0.08 300 / 60%), transparent 60%);
+}
+
+.dark {
+  --background: oklch(0.17 0.045 270);
+  --foreground: oklch(0.97 0.01 280);
+  --card: oklch(0.22 0.05 272);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.22 0.05 272);
+  --popover-foreground: var(--foreground);
+  --secondary: oklch(0.27 0.055 272);
+  --muted: oklch(0.27 0.055 272);
+  --muted-foreground: oklch(0.72 0.04 275);
+  --accent: oklch(0.3 0.07 290);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --surface: oklch(0.22 0.05 272);
+  --tile: oklch(0.94 0.015 275);
+  --overlay: oklch(0.08 0.03 270 / 80%);
+  --app-glow: radial-gradient(120% 60% at 50% -10%, oklch(0.4 0.17 300 / 45%), transparent 60%);
+}
+
+@utility bg-app {
+  background: var(--app-glow), var(--background);
+}
+@utility btn-brand {
+  background: var(--gradient-brand);
+  color: var(--primary-foreground);
+  box-shadow: 0 10px 28px -12px color-mix(in oklab, var(--brand-to) 70%, transparent);
+  transition: transform 0.15s, filter 0.15s;
+  &:active { transform: scale(0.98); }
+  &:hover { filter: brightness(1.08); }
+}
+@utility btn-outline-brand {
+  border: 1.5px solid color-mix(in oklab, var(--brand-from) 60%, transparent);
+  background: color-mix(in oklab, var(--brand-from) 10%, var(--surface));
+  color: var(--foreground);
+  transition: transform 0.15s;
+  &:active { transform: scale(0.98); }
+}
+@utility progress-brand {
+  background: var(--gradient-brand);
+}
+@utility text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility hero-card {
+  background: linear-gradient(160deg, color-mix(in oklab, var(--brand-from) 18%, var(--surface)), var(--surface));
+  border: 1px solid color-mix(in oklab, var(--brand-from) 25%, transparent);
+}
+@utility tile {
+  background: var(--tile);
+  border-radius: 0.9rem;
+  border: 2px solid transparent;
+}
+@utility tile-missing {
+  border: 2px dashed color-mix(in oklab, var(--brand-to) 70%, transparent);
+}
+@utility tile-correct {
+  border-color: var(--success);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--success) 35%, transparent);
+}
+@utility tile-wrong {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive) 35%, transparent);
+}
+@utility ring-brand {
+  background: color-mix(in oklab, var(--brand-from) 16%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--brand-from);
+}
+@utility feedback-ok {
+  background: color-mix(in oklab, var(--success) 16%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--success) 50%, transparent);
+}
+@utility feedback-bad {
+  background: color-mix(in oklab, var(--destructive) 14%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--destructive) 50%, transparent);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+}
